@@ -14,13 +14,14 @@ $result=mysqli_query($conn, $sql) or die("fail");
 
 while ($row=mysqli_fetch_array($result)) {
 if(($sdate) == $row['noticedate']) {
-echo "<script>
-					alert('Date is not available');
-					alert('Please select another date');
+	?> 
+<script>
+					alert('Date is not available\nPlease select another date');
+					
 					window.location.href='home.php'; 
-		</script>";
+		</script>;
 		
-		
+		<?php
 }}
  if(trim($ssport) == '1') {
 echo "<script>

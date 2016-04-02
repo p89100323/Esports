@@ -6,6 +6,7 @@
     $sdate = $_SESSION['sdate'];
     $scourt = $_SESSION['scourt'];
     $ssport = $_SESSION['ssport'];
+   
 
     
    $bdate1 = date ("l, Y/m/d",strtotime("$sdate"));
@@ -31,6 +32,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/table.css">
         <link rel="stylesheet" href="css/bootstrap-datepicker.css">
         <link rel="stylesheet" href="css/datepicker.css">
         <link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
@@ -156,7 +158,7 @@
                                         <tbody>
                                                       
                                         <tr>
-                                           <form action="checkcourt.php" method="post" name="form2" target="_self" id="form2">
+                                           
                                           
                                             <?php 
                                             
@@ -227,7 +229,7 @@
                                                 ?>
                                                 <td align="center" bgcolor="FFCC00">6pm-8pm<br>Booked</td>
                                                 <?php } else { ?>
-                                                <td align="center" bgcolor="B3B3D7">6pm-8pm<br><a href="confirmbookingphp?btime=5&sdate=<?php echo $sdate ?>">Book</a></td> <?php } ?>
+                                                <td align="center" bgcolor="B3B3D7">6pm-8pm<br><a href="confirmbooking.php?btime=5&sdate=<?php echo $sdate ?>">Book</a></td> <?php } ?>
                                             </tr>
                                             <tr>
                                                 

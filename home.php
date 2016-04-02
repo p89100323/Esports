@@ -17,6 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/table.css">
         <link rel="stylesheet" href="css/bootstrap-datepicker.css">
         <link rel="stylesheet" href="css/datepicker.css">
         <link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
@@ -61,6 +62,7 @@
         <![endif]-->
 </head>
 
+
 <body class="nav-md" >
     <div class="container body">
         <div class="main_container">
@@ -77,18 +79,18 @@
                             <span>Sport Facilities Booking System</span>
                     </div>
                     <br/>
-					
-					<!-- sidebar menu -->
+                    
+                    <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
                         <div class="menu_section">
                             <h3></h3>
                             <ul class="nav side-menu">
                                 <li>
-									<a  href="home.php"><i class="fa fa-home"></i> Main</a>
+                                    <a  href="home.php"><i class="fa fa-home"></i> Main</a>
                                 </li>
                                 <li>
-									<a  href="userstatus.php"><i class="fa fa-user"></i> Status</span></a>
+                                    <a  href="userstatus.php"><i class="fa fa-user"></i> Status</span></a>
                                 </li>                               
                             </ul>
                         </div>
@@ -169,7 +171,7 @@
                                                         });
                                                     });
                                                 </script>
-
+                                                </td>
                                                 <tr>
                                                 <td style="text-align: center;">
 
@@ -197,14 +199,14 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            
                         </div>
        
 
     </div>
     </div>
 
-            </div>
+           
 
     <script src="js/bootstrap.min.js"></script>
 

@@ -11,6 +11,7 @@
     $scourt = $_SESSION['scourt'];
     $ssport = $_SESSION['ssport'];
     $bdate1 = date ("l, Y/m/d",strtotime("$sdate"));
+   
 ?>
 
 
@@ -28,7 +29,7 @@
     <!-- Bootstrap core CSS -->
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="css/table.css">
     <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
 
@@ -138,26 +139,8 @@
                                           <td width="255" style="text-align: left;"><div align="left"><?php echo "$bdate1" ?>
                                             <input type="hidden" name="bdate" value="<?php echo "$sdate" ?>"> 
                                             </div></td>
-                                           </tr>
-                                           <tr>
-                                           <td style="text-align: right;"><div align="right">Time:</div></td>  
-                                           <?php 
-                                                $result1 = mysqli_query($conn,"SELECT * FROM bookingtime where bil = '$btime'");
-                                                   if ($row=mysqli_fetch_array($result1))?> 
-                                             <td style="text-align: left;"><div align="left"><?php echo "$row[abtime]"; ?>
-                                               <input type="hidden" name="btime" value="<?php echo "$row[bil]"; ?>">
-                                             </div></td>
-                                           </tr>
+                                           </tr> 
                                             <tr>
-                                            <td style="text-align: right;"><div align="right">Sport:</div></td>  
-                                           <?php 
-                                                $result1 = mysqli_query($conn,"SELECT * FROM sports where bil = '$ssport'");
-                                                   if ($row=mysqli_fetch_array($result1))?> 
-                                             <td style="text-align: left;"><div align="left"><?php echo "$row[sport]"; ?>
-                                               <input type="hidden" name="bsport" value="<?php echo "$row[bil]"; ?>">
-                                             </div></td>
-                                           </tr>
-                                           <tr>
                                            <td style="text-align: right;"><div align="right">Name:</div></td>  
                                             <td style="text-align: left;"><div align="left"><?php echo $_SESSION['name']; ?>
                                               <input type="hidden" name="name" value="<?php echo $_SESSION['name']; ?>">
@@ -168,8 +151,22 @@
                                             <td style="text-align: left;"><div align="left"><?php echo $_SESSION['nohp']; ?>
                                               <input type="hidden" name="nohp" value="<?php echo $_SESSION['nohp']; ?>">
                                             </div></td>
-                                           </tr>                                           
-                                           <tr>
+                                           </tr> 
+                                           <td style="text-align: right;"><div align="right">Price:</div></td>  
+                                            <td style="text-align: left;"><div align="left">RM12
+                                              <input type="hidden" name="price" value="RM12">
+                                            </div></td>
+                                           </tr>                                                                                      
+                                            <tr>
+                                            <td style="text-align: right;"><div align="right">Sport:</div></td>  
+                                           <?php 
+                                                $result1 = mysqli_query($conn,"SELECT * FROM sports where bil = '$ssport'");
+                                                   if ($row=mysqli_fetch_array($result1))?> 
+                                             <td style="text-align: left;"><div align="left"><?php echo "$row[sport]"; ?>
+                                               <input type="hidden" name="bsport" value="<?php echo "$row[bil]"; ?>">
+                                             </div></td>
+                                           </tr>
+                                            <tr>
                                            <td style="text-align: right;"><div align="right">Court:</div></td>  
                                            <?php 
                                                 $result1 = mysqli_query($conn,"SELECT * FROM courts where courtid = '$scourt'");
@@ -177,8 +174,18 @@
                                              <td sstyle="text-align: left;"><div align="left"><?php echo "$row[court]"; ?>
                                                <input type="hidden" name="bcourt" value="<?php echo "$row[courtid]";?>">
                                              </div></td>
-                                              
+                                            <tr>
+                                           <td style="text-align: right;"><div align="right">Time:</div></td>  
+                                           <?php 
+                                                $result1 = mysqli_query($conn,"SELECT * FROM bookingtime where bil = '$btime'");
+                                                   if ($row=mysqli_fetch_array($result1))?> 
+                                             <td style="text-align: left;"><div align="left"><?php echo "$row[abtime]"; ?>
+                                               <input type="hidden" name="btime" value="<?php echo "$row[bil]"; ?>">
+                                             </div></td>
+                                           </tr>  
                                            </tr>
+                                                                                    
+                                          
                                            <tr>
                                            <td colspan="2" style="text-align: center;"> <input type="submit" name="Submit" value="Confirm" /> <a href="home.php"><input type="button" name="buttoncancel" value="Cancel" /></a></td>
                                            </tr>

@@ -18,6 +18,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/table.css">
         <link rel="stylesheet" href="css/bootstrap-datepicker.css">
         <link rel="stylesheet" href="css/datepicker.css">
         <link rel="stylesheet" href="css/bootstrap-datepicker.min.css">

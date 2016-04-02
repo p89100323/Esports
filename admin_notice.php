@@ -1,11 +1,10 @@
 <?php
 	include("db/dbc.php");
 	session_start();
-
-
-
 	//If your session isn't valid, it returns you to the login screen for protection
-
+    if(empty($_SESSION['bil'])){
+     header("location:access-denied.php");
+    }
 ?>
 
 
@@ -19,18 +18,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/table.css">
-        <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-        <link rel="stylesheet" href="css/datepicker.css">
-        <link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
-        <link rel="stylesheet" href="css/bootstrap-datepicker.standalone.css">
-        <link rel="stylesheet" href="css/bootstrap-datepicker.standalone.min.css">
-        <link rel="stylesheet" href="css/bootstrap-datepicker3.css">
-        <link rel="stylesheet" href="css/bootstrap-datepicker3.min.css">
-        <link rel="stylesheet" href="css/bootstrap-datepicker3.standalone.css">
-        <link rel="stylesheet" href="css/bootstrap-datepicker3.standalone.min.css">
+        
+
         <script src="js/main.js"></script>
-        <script src="js/bootstrap-datepicker.js"></script>
-        <script src="js/bootstrap-datepicker.min.js"></script>
+        
         
     <title>Sport Facilities Booking System</title>
 
@@ -87,11 +78,17 @@
                             <h3></h3>
                             <ul class="nav side-menu">
                                 <li>
-									<a  href="home.php"><i class="fa fa-home"></i> Main</a>
+									<a  href="admin_notice.php"><i class="fa fa-home"></i>Update Notice</a>
                                 </li>
                                 <li>
-									<a  href="userstatus.php"><i class="fa fa-user"></i> Status</span></a>
-                                </li>                               
+									<a  href="manage_booking.php"><i class="fa fa-user"></i>Manage Booking</span></a>
+                                </li>   
+                                <li>
+                                    <a  href="view_record.php"><i class="fa fa-user-md"></i>View Record</a>
+                                </li>
+                                <li>
+                                    <a  href="keputusan.php"><i class="fa fa-list"></i>Generate Report</a>
+                                </li>                            
                             </ul>
                         </div>
                     </div>
@@ -124,10 +121,11 @@
             
 
                 <!-- top tiles -->
-                <div class="col-md-12 col-sm-12 col-xs-12">
+               
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>List of Available Court</h2>
+                                    <h2>Announcement</h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <!-- Display errors in del_errors stack if any and unset once done -->  
@@ -138,44 +136,42 @@
                                         <thead>
                                             <tr class="headings">
                                                 
-                                                <th class="column-title" style="text-align: center;">Court</th>
+                                                <th  colspan="2" class="column-title" style="text-align: center;">Update Notice</th>
                                             </tr>
-                                   </thead>
-                                        <tbody>
- <?php 
-                                        include("db/dbc.php");
-                                        $sql= "SELECT * FROM courts where sportid = '3'";
-                                        $result=mysqli_query($conn, $sql);
-                                        if (!$result) { 
-                                            die('Invalid query: ' . mysql_error());
-                                        }
-                                                                              
-                                        ?>             
-                                     <tr>
-                                      <form action="savecourt.php" method="post" name="form2" target="_self" id="form2">
-                                        <td  style="text-align:center;"> 
-                                           
-                                                <tr>
-                                                <td style="text-align: center;">
+                                        </thead>
 
-                                                <select name="scourt" id="scourt" >
-                                                <?php
-                                                while ($row=mysqli_fetch_array($result)){
-                                                echo "<option value=$row[courtid]>$row[court]</option>";
-                                                }
-                                                ?>
-                                                </select>
-                                                
+                                        <tbody>
+                                              
+                                      <form action="updatenotice.php" method="post" name="updatenotice" target="_self" id="updatenotice">
+                                      <tr>
+                                            <td style="text-align: center;">Notice:</td>
+                                            <td> <input required title="" class="form-control" name="notice" type="text"  /></td>
+                                            
+                                          </tr>
                                           
+                                         <tr>
+                                            <td style="text-align:center;"> Date: </td>                                           
+                                            <td><input required title="You must select a date" class="datepicker" type="text" name="ndate">
+                                                <script>
+            
+                                                    $(function(){
+                                                        $('.datepicker').datepicker({
+                                                            startDate: "today",
+                                                            format: 'yyyy-mm-dd',
+                                                            todayBtn: true,
+                                                            autoclose: true,
+                                                            todayHighlight: true
+                                                        });
+                                                    });
+                                                </script>
                                                 </td>
-                                                </tr>
-                                          <?php 
-                                        
-                                    mysqli_close($conn);
-                                    ?>
+                                          </tr>
+          
+         
+
                                      <tr>
-                                           <td style="text-align: center;"> 
-                                           <input type="submit" name="Submit" value="Select" />
+                                           <td colspan="2" style="text-align: center;"> 
+                                           <input type="submit" name="Submit" value="Update" />
                                            </td>
                                             </form>
                                             </tr>
@@ -184,19 +180,20 @@
                                 </div>
                             </div>
                         </div>
+       
 
     </div>
     </div>
 
             </div>
 
-    <script src="js/bootstrap.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
 
     <!-- bootstrap progress js -->
     <script src="js/progressbar/bootstrap-progressbar.min.js"></script>
     <script src="js/nicescroll/jquery.nicescroll.min.js"></script>
-	
-	<script src="js/custom.js"></script>
+    
+    <script src="js/custom.js"></script>
     <!-- /footer content -->
 </body>
 

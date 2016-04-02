@@ -1,12 +1,14 @@
 <?php
 	include("db/dbc.php");
 	session_start();
-
-
-
 	//If your session isn't valid, it returns you to the login screen for protection
+    if(empty($_SESSION['bil'])){
+     header("location:access-denied.php");
+   }
 
-?>
+       
+ ?>
+
 
 
 <!DOCTYPE html>
@@ -124,66 +126,118 @@
             
 
                 <!-- top tiles -->
-                <div class="col-md-12 col-sm-12 col-xs-12">
+               
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>List of Available Court</h2>
+                                    <h2>Status</h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <!-- Display errors in del_errors stack if any and unset once done -->  
                                 <div class="x_content">
                                     
                                     
-                                    <table class="table table-striped responsive-utilities jambo_table bulk_action">
+                                    <table class="rwd-table">
                                         <thead>
                                             <tr class="headings">
                                                 
-                                                <th class="column-title" style="text-align: center;">Court</th>
+                                                <th colspan="9" class="column-title" style="text-align: center;">Record</th>
                                             </tr>
-                                   </thead>
+                                        </thead>
+
                                         <tbody>
- <?php 
+                                        <tr >
+                                            <th>Bil</th>
+                                            <th>Sport</th>
+                                            <th>Court</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Price</th>
+                                            <th>Payment Slip</th>
+                                            <th>Status</th>
+                                            
+                                          </tr>
+                                        <?php                                                            
                                         include("db/dbc.php");
-                                        $sql= "SELECT * FROM courts where sportid = '3'";
+                                        $sql= "SELECT * FROM booking where name = '$_SESSION[name]'";
                                         $result=mysqli_query($conn, $sql);
                                         if (!$result) { 
                                             die('Invalid query: ' . mysql_error());
                                         }
-                                                                              
-                                        ?>             
-                                     <tr>
-                                      <form action="savecourt.php" method="post" name="form2" target="_self" id="form2">
-                                        <td  style="text-align:center;"> 
-                                           
-                                                <tr>
-                                                <td style="text-align: center;">
+                                        $i=0; 
+                                        while ($row=mysqli_fetch_array($result)){
+                                            $bil = $row['bil'];
+                                            $bsport = $row['bsport'];
+                                            $bcourt = $row['bcourt'];
+                                            $bdate = $row['bdate'];
+                                            $btime = $row['btime'];
+                                            $price = $row['price'];
+                                            $bstatus = $row['bstatus'];
+                                            
+                                            $file_path = $row['file_path'];
+                                        $i++;  
+                                                                        
+                                        ?>   
 
-                                                <select name="scourt" id="scourt" >
-                                                <?php
-                                                while ($row=mysqli_fetch_array($result)){
-                                                echo "<option value=$row[courtid]>$row[court]</option>";
-                                                }
+                                           <tr>
+                                            <td data-th = "Bil"><?php echo $i;?></td>
+                                            <td data-th = "Sport"><?php 
+                                                $result1 = mysqli_query($conn,"SELECT * FROM sports where bil=$bsport");
+                                                    if ($row=mysqli_fetch_array($result1)) ?><?php echo $row{'sport'} ?></td>
+                                            <td data-th = "Court"><?php 
+                                                $result1 = mysqli_query($conn,"SELECT * FROM courts where courtid=$bcourt");
+                                                   if ($row=mysqli_fetch_array($result1))?><?php echo $row{'court'}?></td>
+                                            <td data-th = "Date"><?php echo $bdate?></td>
+                                            <td data-th = "Time"><?php 
+                                                $result1 = mysqli_query($conn,"SELECT * FROM bookingtime where bil=$btime");
+                                                   if ($row=mysqli_fetch_array($result1))?><?php echo $row{'abtime'}?></td>
+                                            <td data-th = "Price"><?php echo $price?></td>
+
+                                               
+                                            <?php 
+                                                $result1 = mysqli_query($conn,"SELECT file_name FROM booking where file_path != ''");
+                                                   if ($file_path != "") {
                                                 ?>
-                                                </select>
-                                                
-                                          
-                                                </td>
-                                                </tr>
+                                                <td  data-th = "Payment Slip"><?php echo $file_path?></td>
+                                            
+                                             <?php } else { ?>
+                                                 <td>   <form enctype="multipart/form-data" action="saveupload.php" method="POST">
+                                                    
+                                                    <p>
+                                                        <input type="file" name="file" >
+                                                    </p>
+                                                    <p>
+                                                        <input type="submit" name="submit" value="Upload file" style="background:grey;">
+                                                    </p>
+                                                        
+                                                    </form></td>
+                                                    <?php }?> 
+
+                                            <td data-th = "Status"><?php echo $bstatus?></td>
+                                            <?php 
+                                                $result1 = mysqli_query($conn,"SELECT bstatus FROM booking where bstatus like 'Approved'");
+                                                   if ($bstatus == "Approved") {
+                                                ?>
+                                            
+                                                <td align="center">        </td>
+                                                <?php } else { ?>
+                                             <td><a href="delete.php?bil=<?php echo $bil;?>">Delete</a> </td>
+                                             <?php }?>  
+
+                                           </tr>
                                           <?php 
-                                        
+                                        }
                                     mysqli_close($conn);
                                     ?>
                                      <tr>
-                                           <td style="text-align: center;"> 
-                                           <input type="submit" name="Submit" value="Select" />
-                                           </td>
-                                            </form>
+                                           
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+       
 
     </div>
     </div>
